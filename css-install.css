@@ -1,0 +1,51 @@
+<style>
+        /* Add the CSS directly if not using a separate file */
+        #installNotification {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 8px;
+            background-color: #ef4323;
+            color: black;
+            z-index: 1000;
+            font-size: 0.9rem;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: translateY(-100%);
+            align-items: center;
+        }
+
+        #installNotification button {
+            margin-left: auto;
+            padding: 6px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        #installNotification button:hover {
+            background-color: #333;
+        }
+
+        /* Ensure the notification is fully visible on small screens */
+        @media (max-width: 400px) {
+            #installNotification {
+                font-size: 0.8rem;
+                padding: 6px;
+            }
+
+            #installNotification button {
+                padding: 4px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
