@@ -1,5 +1,5 @@
-<style>
-        /* Add the CSS directly if not using a separate file */
+
+     /* Add the CSS directly if not using a separate file */
         #installNotification {
             display: none;
             position: fixed;
@@ -48,4 +48,4 @@
                 font-size: 0.8rem;
             }
         }
-    </style>
+ 
