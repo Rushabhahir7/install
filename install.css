@@ -1,0 +1,279 @@
+a:link, a:visited, a:active, a:hover {
+    text-decoration: none !important;
+}
+
+/* Default text color */
+
+/* General Notification Styles */
+.notification {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ef4323;
+    color: black;
+    text-align: center;
+    padding: 15px 20px;
+    font-size: 16px;
+    z-index: 9999;
+    transform: translateY(-100%);
+    transition: transform 0.5s ease;
+}
+
+/* Specific Styles for Developer Tools Notification */
+.devtools-notification.show {
+    display: block;
+    transform: translateY(0%);
+}
+
+/* Styles for Noscript Message */
+noscript {
+    display: block;
+    z-index: 10000;
+    /* Higher z-index for priority over other notifications */
+    transform: none;
+    /* Remove animation for noscript */
+}
+
+/* Responsive font size */
+@media (max-width: 768px) {
+    .notification, noscript {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .notification, noscript {
+        font-size: 12px;
+        padding: 10px 12px;
+    }
+}
+
+/* Responsive styles for the notification */
+#installNotification {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    background-color: #ef4323;
+    color: black;
+    z-index: 1000;
+    font-size: 0.9rem;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-100%);
+    align-items: center;
+}
+
+#installNotification button {
+    margin-left: auto;
+    padding: 6px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+#installNotification button:hover {
+    background-color: #333;
+}
+
+#installNotification svg {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    fill: white;
+}
+
+/* Ensure the notification is fully visible on small screens */
+@media (max-width: 400px) {
+    #installNotification {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    #installNotification button {
+        padding: 4px 16px;
+        font-size: 0.8rem;
+    }
+
+    #installNotification svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+     /* Add the CSS directly if not using a separate file */
+        #installNotification {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 8px;
+            background-color: #ef4323;
+            color: black;
+            z-index: 1000;
+            font-size: 0.9rem;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: translateY(-100%);
+            align-items: center;
+        }
+
+        #installNotification button {
+            margin-left: auto;
+            padding: 6px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        #installNotification button:hover {
+            background-color: #333;
+        }
+
+        /* Ensure the notification is fully visible on small screens */
+        @media (max-width: 400px) {
+            #installNotification {
+                font-size: 0.8rem;
+                padding: 6px;
+            }
+
+            #installNotification button {
+                padding: 4px 16px;
+                font-size: 0.8rem;
+            }
+        }
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.error-network {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px; /* Increased Padding */
+    background-color: #ef4323;
+    color: black;
+    font-size: 20px; /* Increased Text Size */
+    text-align: left;
+    box-sizing: border-box;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer;
+}
+
+.error-network.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: dropDown 0.5s ease-out;
+}
+
+.close-btn {
+    position: absolute;
+    top: 50%;
+    right: 30px; /* Adjusted Right Position */
+    transform: translateY(-50%);
+    font-size: 44px; /* Increased Icon Size */
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* Hover Effects */
+.error-network:hover {
+    background-color: #d93c1f; /* Hover effect for the entire notification box */
+}
+
+.error-network:hover .close-btn {
+    color: #fff; /* Hover effect specifically for the close icon */
+}
+
+.error-network span:hover {
+    color: #000; /* Hover effect specifically for the text */
+}
+
+/* Animation */
+@keyframes dropDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .error-network {
+        font-size: 18px; /* Adjusted Text Size */
+        padding: 22px 28px; /* Adjusted Padding */
+    }
+
+    .close-btn {
+        font-size: 40px; /* Adjusted Icon Size */
+    }
+}
+
+@media (max-width: 768px) {
+    .error-network {
+        font-size: 16px; /* Adjusted Text Size */
+        padding: 20px 25px; /* Adjusted Padding */
+    }
+
+    .close-btn {
+        font-size: 36px; /* Adjusted Icon Size */
+    }
+}
+
+@media (max-width: 480px) {
+    .error-network {
+        font-size: 15px; /* Adjusted Text Size */
+        padding: 18px 22px; /* Adjusted Padding */
+    }
+
+    .close-btn {
+        font-size: 32px; /* Adjusted Icon Size */
+        right: 20px; /* Adjusted Right Position */
+    }
+}
+
+@media (max-width: 320px) {
+    .error-network {
+        font-size: 14px; /* Adjusted Text Size */
+        padding: 16px 20px; /* Adjusted Padding */
+    }
+
+    .close-btn {
+        font-size: 28px; /* Adjusted Icon Size */
+    }
+}
+
+ 
