@@ -1,5 +1,5 @@
-<script>
-    let deferredPrompt;
+
+  let deferredPrompt;
 
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -33,4 +33,4 @@
             setTimeout(() => installNotification.style.display = 'none', 300);
         }, 10000);
     }
-</script>
+
