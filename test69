@@ -1,0 +1,101 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function showNotification(adFree) {
+        if (adFree) {
+            return; // Do not show the notification if the user has an ad-free token
+        }
+
+        var path = window.location.pathname;
+        var isWatchPage = path.startsWith('/watch/') && window.location.hostname === 'rareetoon.in';
+
+        if (isWatchPage) {
+            if (!document.getElementById('notificationOverlay')) {
+                // Create the content overlay (leaving header and footer visible)
+                var overlay = document.createElement('div');
+                overlay.id = 'notificationOverlay';
+                overlay.style.position = 'fixed';
+                overlay.style.top = '60px'; // Adjust as needed
+                overlay.style.bottom = '60px'; // Adjust as needed
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                overlay.style.color = 'white';
+                overlay.style.display = 'flex';
+                overlay.style.flexDirection = 'column';
+                overlay.style.justifyContent = 'center';
+                overlay.style.alignItems = 'center';
+                overlay.style.zIndex = '9999';
+                overlay.style.textAlign = 'center';
+                overlay.style.backdropFilter = 'blur(10px)'; // Add blur effect to background
+
+                // Create message
+                var message = document.createElement('p');
+                message.textContent = "Skip Ad once\nAnd enjoy Ad-Free Content For next 24-hours";
+
+                // Create button
+                var button = document.createElement('button');
+                button.id = 'skipButton';
+                button.textContent = 'Skip Ads';
+                button.style.padding = '15px 30px';
+                button.style.fontSize = '18px';
+                button.style.backgroundColor = '#FC6802'; // Update button color
+                button.style.color = 'black'; // Update button text color
+                button.style.border = 'none';
+                button.style.cursor = 'pointer';
+                button.style.marginTop = '20px';
+
+                // Append elements to overlay
+                overlay.appendChild(message);
+                overlay.appendChild(button);
+                document.body.appendChild(overlay);
+
+                // Handle button click
+                button.addEventListener('click', function() {
+                    var currentWatchPageUrl = window.location.href;
+                    window.location.href = "https://rareetoon.in/skip.php?return_url=" + encodeURIComponent(currentWatchPageUrl);
+                });
+            }
+        } else {
+            // Remove the overlay when not on a watch page
+            var existingOverlay = document.getElementById('notificationOverlay');
+            if (existingOverlay) {
+                existingOverlay.remove();
+            }
+        }
+    }
+
+    function checkAdFreeStatus() {
+        // Perform an AJAX request to check the ad-free token status
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/check_token', true); // Updated endpoint
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var adFree = JSON.parse(xhr.responseText).adFree;
+                localStorage.setItem('adFree', adFree); // Cache the ad-free status in localStorage
+                showNotification(adFree);
+            }
+        };
+        xhr.send();
+    }
+
+    var cachedAdFreeStatus = localStorage.getItem('adFree');
+    if (cachedAdFreeStatus !== null) {
+        showNotification(JSON.parse(cachedAdFreeStatus));
+    } else {
+        checkAdFreeStatus();
+    }
+
+    window.addEventListener('popstate', function() {
+        checkAdFreeStatus();
+    });
+
+    document.body.addEventListener('click', function(e) {
+        var target = e.target;
+        if (target && target.tagName === 'A' && target.href) {
+            setTimeout(function() {
+                checkAdFreeStatus();
+            }, 100);
+        }
+    });
+});
+</script>
